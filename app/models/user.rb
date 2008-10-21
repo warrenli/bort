@@ -23,10 +23,13 @@ class User < ActiveRecord::Base
   # Relationships
   has_and_belongs_to_many :roles
 
+  # For changing password
+  attr_accessor :current_password
+
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :identity_url
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :identity_url, :current_password
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -47,7 +50,7 @@ class User < ActiveRecord::Base
   
   # Overwrite password_required for open id
   def password_required?
-    new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
+    new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : (!password.blank? || !current_password.blank?)
   end
 
   protected

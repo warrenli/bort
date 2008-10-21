@@ -1,0 +1,56 @@
+<% @user.password = @user.password_confirmation = @user.current_password = nil %>
+<%= title "My Account", :h1 %>
+<% form_for(@user) do |f| %>
+  <%= f.error_messages %>
+
+  <fieldset>
+    <legend>Basic Information</legend>
+
+    <%= hidden_field_tag "attribute", "basic", :id => nil %>
+
+    <div class="form_row"><label for="login">Login:</label>
+      <%= @user.login %>
+    </div>
+
+    <div class="form_row"><label for="email">Email:</label>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="form_row"><label for="name">Name:</label>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form_row"><label for="identity_url">OpenID URL:</label>
+      <%= f.text_field :identity_url %>
+    </div>
+
+    <div class="form_row">
+      <%= submit_tag "Update", :class => "submit" %>
+    </div>
+
+  </fieldset>
+<% end %>
+
+<% form_for @user do |f| %>
+  <fieldset>
+    <legend>Change Password</legend>
+
+    <%= hidden_field_tag "attribute", "password", :id => nil %>
+
+    <div class="form_row"><label for="current_password">Current Password:</label>
+      <%= f.password_field :current_password %>
+    </div>
+
+    <div class="form_row"><label for="password">New Password:</label>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="form_row"><label for="password_confirmation">Confirm Password:</label>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="form_row">
+      <%= submit_tag "Update", :class => "submit" %>
+    </div>
+</fieldset>
+<% end %>

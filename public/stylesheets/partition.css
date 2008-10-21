@@ -1,0 +1,17 @@
+* html * {   zoom:100%;    }body {
+    font-family: verdana, helvetica, arial, sans-serif; 
+    font-size: 0.8em;
+    }* {margin:0; padding:0;}div#container {
+    min-width:700px; 
+    max-width:1000px;  
+    margin-left:auto; 
+    margin-right:auto;   
+    margin-top: 0.5em; 
+    margin-bottom: 0.5em; 
+    } /* centers layout when > max width */body {background-color:#666666;}#container {
+    background-color:#FFF; 
+    border: 1px solid #CCFF00;  
+    }div#header {    width:auto;    }#threecolwrap {    float:left;    width:100%;    }#twocolwrap {    float:left;    width:100%;    display:inline;    margin-right:-107px;    }#left {    float:left;    width:107px;    display:inline;    }#content {    width:auto;    margin-left:107px;    margin-right:107px;    min-height:450px;    height: auto !important;    height: 450px;/*
+    border-left: 1px solid #D8D2C3;
+    border-right: 1px solid #D8D2C3;*/
+    }#right {    float:left;    width:107px;    display:inline;    }#footer {    width:100%;    clear:both;    }#header_inner, #left_inner, #content_inner, #right_inner {    overflow:hidden; /* prevents oversize elements from breaking the layout */    }

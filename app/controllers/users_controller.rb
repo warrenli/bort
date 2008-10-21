@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
+  before_filter :login_required, :only => [ :show, :edit, :update ]
   
   def new
     @user = User.new
@@ -38,6 +39,51 @@ class UsersController < ApplicationController
     end
   end
   
+  # GET /users/1
+  # GET /users/1.xml
+  def show
+    @user = current_user
+    redirect_to edit_user_url(@user)
+  end
+
+  # GET /users/1/edit
+  def edit
+    @user = current_user
+  end
+
+  # PUT /users/1
+  # PUT /users/1.xml
+  def update
+    @user = current_user
+    attribute = params[:attribute]
+    # flash[:notice] = flash[:error] =""
+    case attribute
+      when "basic"
+        if @user.update_attributes(params[:user])
+          flash.now[:notice] = 'Basic Information was successfully updated.'
+        else
+          flash.now[:error]  = 'Please check your input.'
+        end
+      when "password"
+        if User.authenticate(@user.login, params[:user][:current_password])
+          if @user.update_attributes(params[:user])
+            flash.now[:notice] = 'Password was successfully updated.'
+          else
+            flash.now[:error] = 'Invalid! Password not changed.'
+            # @user.errors.add_to_base("New password not valid")
+          end
+        else
+          flash.now[:error] = 'Please enter your current password.'
+          @user.errors.add(:current_password, "not valid")
+        end
+    end
+    respond_to do |format|
+        format.html { render :action => "edit" }
+        # format.html { redirect_to edit_user_url(@user) }
+    end
+
+  end
+
   protected
   
   def create_new_user(attributes)

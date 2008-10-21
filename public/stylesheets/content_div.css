@@ -1,0 +1,219 @@
+.float_left {float:left; margin: 0 .3em .3em 0;}      /* apply this class to any image or element with width - text will wrap it to the right */.float_right {float:right;  margin: 0 0 .3em .3em;} /* apply this class to any image or element with width  - text will wrap it to the left */
+
+#content_inner {    color: black;
+    background-color: white;
+    text-align: justify;
+    line-height: 1.5em;
+    margin: 0em;
+    padding: 1em;
+/*    border: 2px solid #D8D2C3; */}
+
+#content_inner h1 {
+    color: #666699;
+    background-color: transparent;
+    font-family: arial, verdana, helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    margin: 0.5em 0 1em 0;
+    padding: 1em 0 0 0;
+    border-bottom: 1px dashed #D8D2C3;
+}
+
+#content_inner h2, h3 {
+    color: #666666;
+    font-family: arial, verdana, helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+#content_inner a {
+    color: #666699;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+#content_inner a:hover {
+    text-decoration: blink;
+}
+
+/* === FLASH MESSAGES === */
+div#flash-notice {
+    color: #333;
+    border: solid 1px #bd7;
+    padding: 1em;
+    margin: 1em;
+    margin-bottom: 2em;
+    background-color: #efe;
+}
+
+div#flash-warning {
+    padding: 0 0 0 25px;
+}
+
+div#flash-error {
+    color: red;
+    border: 1px solid red;
+    padding: 1em;
+    margin: 1em;
+    margin-bottom: 2em;
+    background-color: #efe;
+}
+
+/* === ERROR MESSAGES === */
+#errorExplanation {
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12pt;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
+}
+
+#errorExplanation p {
+    color: #333;
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+#errorExplanation ul {
+
+}
+
+#errorExplanation ul li {
+    font-size: 11pt;
+    list-style: square;
+}
+
+/* Error Reporting Styles */
+/* === FORMS === */
+div.fieldWithErrors {
+    margin: 2px;
+    padding: 2px;
+    background-color: red;
+/*    display: table; */
+}
+
+div.fieldWithErrors label {
+
+}
+
+div.fieldWithErrors input, div.fieldWithErrors select, 
+div.fieldWithErrors textarea
+{
+
+}
+
+
+fieldset {
+    margin: 2em 0;
+    padding: 1.2em;
+    padding-top: 0.4em;
+    background: #eee;
+    border: 1px solid #AAAAAA;
+}
+
+legend {
+    color: #666699;
+    font-size: 1.4em;
+    padding: .4em 1em;
+    background: #ddd;
+    border: 1px solid #ddd;
+}
+
+
+form label {
+    color: #444;
+    font-size: 1.2em;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    margin-right: 0.2em;
+    width: 10em;
+}
+
+.form_row {
+    white-space: nowrap;
+    padding-bottom: 0.8em;
+}
+.submit {
+    margin-left: 12em;
+}
+/* highlight the current input field */
+input:focus {border: 2px solid blue;}
+
+
+/* list */
+ul, dl, ol {    margin:0 1em .75em 1em; /* lists without specific classes */}li, dd {    padding:0em 0; /* lists without specific classes */    margin-left:1em;}
+
+
+
+
+/* Alphabetical Index */
+.letter {
+    width: 1em;
+    text-align: center;
+    border: 1px solid #666699;
+    background: #fff;
+    padding: 5px 2px 1px 2px;
+    float: left;
+    margin: 2px
+}
+.letter:hover {
+    background: #7490AE;
+    border: 1px solid #666699;
+    font-weight: bold;
+}
+.letter_current {
+    font-weight: bold;
+    width: 1em;
+    text-align: center;
+    border: 1px solid purple;
+    background: #7490AE;
+    padding: 5px 2px 1px 2px;
+    float: left;
+    margin: 2px
+}
+
+
+/* Table */
+table.grid {
+    background: #fff;
+    margin-left: 2em;
+}
+
+table.grid th {
+    color: white;
+    background: #666699;
+    font-weight: bold;
+    padding: 0.5em;
+    white-space: nowrap;
+}
+
+table.grid th a {
+    color: white;
+    text-decoration: underline;
+}
+
+table.grid td {
+    text-align: left;
+    padding: 0.5em;
+    white-space: nowrap;
+}
+
+table.grid tr.even {
+    background: #ddd;
+}
+
+table.grid tr.odd {
+    background: #eee;
+}
+

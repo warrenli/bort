@@ -12,7 +12,9 @@ class PasswordsController < ApplicationController
       flash[:notice] = "A link to change your password has been sent to #{@password.email}."
       redirect_to :action => :new
     else
-      render :action => :new
+      flash[:error] = "A link to change your password has been sent to your email address."
+      redirect_to :action => :new
+      # render :action => :new
     end
   end
 
@@ -36,7 +38,7 @@ class PasswordsController < ApplicationController
       redirect_to :action => :reset, :reset_code => params[:reset_code]
     end
   end
-  
+=begin
   def update
     @password = Password.find(params[:id])
 
@@ -47,4 +49,5 @@ class PasswordsController < ApplicationController
       render :action => :edit
     end
   end
+=end
 end

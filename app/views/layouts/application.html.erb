@@ -1,33 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-	<head>
-		<title><%= @page_title || APP_CONFIG[:site_name] %></title>
-		<meta http-equiv="content-type" content="text/xhtml; charset=utf-8" />
-		<meta http-equiv="imagetoolbar" content="no" />
-		<meta name="distribution" content="all" />
-		<meta name="robots" content="all" />	
-		<meta name="resource-type" content="document" />
-		<meta name="MSSmartTagsPreventParsing" content="true" />
-		<%= stylesheet_link_tag 'base' %>
-		<%= javascript_include_tag :defaults %>
-	</head>
-	<body>
-		<div id="container">
-			<div id="header">
-				<ul>
-					<% if logged_in? %>
-					<li><%= link_to 'Logout', logout_path %></li>
-					<% else %>
-					<li><%= link_to 'Login', login_path %></li>
-					<li><%= link_to 'Signup', signup_path %></li>
-					<% end %>
-				</ul>
-			</div>
-			<div id="content">
-				<%= flash_messages %>
-				<%= yield :layout %>
-			</div>
-		</div>
-	</body>
+<head>
+  <title><%= @page_title || APP_CONFIG[:site_name] %></title>
+  <meta http-equiv="content-type" content="text/xhtml; charset=utf-8" />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <meta name="distribution" content="all" />
+  <meta name="robots" content="all" />
+  <meta name="resource-type" content="document" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+
+  <%= stylesheet_link_merged 'partition', 'header_div','content_div','footer_div' %>
+  <%= javascript_include_tag :defaults %>
+
+  <!-- additional head elements -->
+  <%= yield :head %>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <div id="header_inner">
+      <div class="superHeader">
+      Super Header
+      </div>
+      <div class="midHeader">
+        <h1 class="headerTitle" lang="la">Site Title</h1>
+        <div class="headerSubTitle">
+        Site Subtitle
+        </div>
+      </div>
+      <div class="subHeader">
+        <span style="float: right">
+        <% if logged_in? %>
+            Hello <%= current_user.login %> &nbsp;
+            <%= link_to_unless_current 'My Account', edit_user_path(current_user) %>
+            <%= link_to 'Logout', logout_path %>
+        <% else %>
+            <%= link_to_unless_current 'Login', login_path %>
+            <%= link_to_unless_current 'Signup', signup_path %>
+        <% end %>
+        </span>
+        &nbsp;
+      </div>
+    </div>
+  </div>
+  <div id="threecolwrap">
+    <div id="twocolwrap">
+      <div id="left">
+      </div>
+      <div id="content">
+      <div id="content_inner">
+        <%= flash_messages %>
+        <%= yield :layout %>
+      </div>
+      </div>
+    </div>
+    <div id="right">
+    </div>
+  </div>
+  <div id="footer">
+    <div id="footer_inner">
+      <p>Copyright &copy; 2008 dontrush.org</p>
+    </div>
+  </div>
+
+  <!-- Debug information -->
+  <% if ENV["RAILS_ENV"] == "development" %>
+  <div id="debug">
+    <a href="#" onclick="Element.toggle('params_debug_info');return false">params</a> |
+    <a href="#" onclick="Element.toggle('session_debug_info');return false">session</a> |
+    <a href="#" onclick="Element.toggle('env_debug_info');return false">env</a> |
+    <a href="#" onclick="Element.toggle('request_debug_info');return false">request</a>
+
+    <fieldset id="params_debug_info" class="debug_info" style="display:none">
+      <legend>params</legend>
+      <%= debug(params) %>
+    </fieldset>
+    <fieldset id="session_debug_info" class="debug_info" style="display:none">
+      <legend>session</legend>
+      <%= debug(session) %>
+    </fieldset>
+    <fieldset id="env_debug_info" class="debug_info" style="display: none">
+      <legend>env</legend>
+      <%= debug(request.env) %>
+    </fieldset>
+    <fieldset id="request_debug_info" class="debug_info" style="display: none">
+      <legend>request</legend>
+      <%= debug(request) %>
+    </fieldset>
+
+  </div>
+  <% end %>
+  <!-- Debug informatin end -->
+
+</div>
+  <!-- additional elements e.g. javascript -->
+  <%= yield :foot %>
+</body>
 </html>

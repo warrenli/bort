@@ -16,9 +16,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   # Home Page
-  map.root :controller => 'sessions', :action => 'new'
+  map.root :controller => 'home', :action => 'index'
 
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+
+  # Catch all url
+  map.connect '*path', :controller => 'home', :action => 'index'
 end

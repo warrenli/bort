@@ -117,6 +117,10 @@ describe UsersController do
     it "should route users's 'destroy' action correctly" do
       route_for(:controller => 'users', :action => 'destroy', :id => '1').should == "/users/1"
     end
+
+    it "should map #activate" do
+      route_for(:controller => "users", :action => "activate", :activation_code => 1).should == "/activate/1"
+    end
   end
   
   describe "route recognition" do
@@ -159,6 +163,10 @@ describe UsersController do
       params_from(:delete, '/users/1.xml').should == {:controller => 'users', :action => 'destroy', :id => '1', :format => 'xml'}
       params_from(:delete, '/users/1.json').should == {:controller => 'users', :action => 'destroy', :id => '1', :format => 'json'}
     end
+
+    it "should generate params for #activate" do
+      params_from(:delete, "/activate/1").should == {:controller => "users", :action => "activate", :activation_code => "1"}
+    end
   end
   
   describe "named routing" do
@@ -189,4 +197,87 @@ describe UsersController do
     end
   end
   
+end
+
+describe UsersController do
+  fixtures :users
+  before(:each) do
+    @quentin = users(:quentin)
+    @basic_params = { :name => 'new name', :email => 'bort@bort.com', :identity_url => '' }
+    @password_params = { :current_password => 'monkey', :password => 'password', :password_confirmation => 'password'}
+  end
+
+  describe "responding to GET show" do
+    it "should be redirected if not login" do
+      get :show, :id => @quentin.id
+      response.should redirect_to('/session/new')
+    end
+
+    it "should be redirected if login" do
+      login_as :quentin
+      get :show, :id => @quentin.id
+      response.should redirect_to(edit_user_url(@quentin))
+    end
+  end
+
+  describe "responding to GET edit" do
+    it "should be redirected if not login" do
+      get :edit, :id => @quentin.id
+      response.should redirect_to('/session/new')
+    end
+
+    it "should expose the requested user if login successful" do
+      login_as :quentin
+      get :edit, :id => @quentin.id
+      assigns(:user).should == @quentin
+      response.should be_success
+    end
+  end
+
+  describe "responding to PUT update" do
+    it "should be redirected if not login" do
+      put :update, :user => @basic_params
+      response.should redirect_to('/session/new')
+    end
+
+    describe "when changing basic information" do
+      it "should be success for valid input" do
+        login_as :quentin
+        put :update, :user => @basic_params, :attribute => "basic"
+        response.should be_success
+        response.flash[:notice].should =~ /Basic Information was successfully updated./
+      end
+
+      it "should have an error because of missing email " do
+        login_as :quentin
+        put :update, :user => { :email => ''}, :attribute => "basic"
+        response.should be_success
+        response.flash[:error].should =~ /Please check your input./
+      end
+    end
+
+    describe "when changing password" do
+      it "should be success for valid password" do
+        login_as :quentin
+        put :update, :user => @password_params, :attribute => "password"
+        response.should be_success
+        response.flash[:notice].should =~ /Password was successfully updated./
+      end
+
+      it "should have an error because of not giving current password"do
+        login_as :quentin
+        put :update, :user => { :current_password => '' }, :attribute => "password"
+        response.should be_success
+        response.flash[:error].should =~ /Please enter your current password./
+      end
+
+      it "should have an error for invalid password" do
+        login_as :quentin
+        put :update, :user => { :current_password => 'monkey', :password => '123' }, :attribute => "password"
+        response.should be_success
+        response.flash[:error].should =~ /Invalid! Password not changed./
+      end
+    end
+  end
+
 end

@@ -1,0 +1,69 @@
+/* ##### Header DIV ##### */
+#header { }
+
+#header_inner {  }
+
+.superHeader {
+	color: #82809A;
+	background-color: maroon;
+	text-align: right;
+	margin: 0;
+	padding: 5px 6px;
+}
+
+
+.midHeader {
+	color: #FFFF66;
+	margin: 0;
+	padding: 2px 0  0 0;
+	background: #CC3333;
+    min-height:120px;    height: auto !important;    height: 120px;
+}
+
+
+.headerTitle {
+	font-size: 300%;
+	margin: 15px 0 0 30px;
+	padding: 0;
+	font-style: italic;
+	font-family: cursive, fantasy, serif;
+}
+
+
+.headerSubTitle {
+	font-size: 151%;
+	font-weight: normal;
+	font-style: italic;
+	margin: 5px 0 0 35px;
+	padding: 0;
+}
+
+.subHeader {
+	color: #CC3333;
+	background-color: #CCFF00;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 109%;
+	/*text-align: center; */
+	margin: 0;
+	padding: 0.5ex 0.5ex;
+}
+
+.subHeader a {
+	color: #666699;
+	background-color: #CCFF00;
+	text-decoration: none;
+	font-weight: bold;
+	margin: 0;
+    padding-bottom:1ex;
+    padding-top:0.5ex;
+	padding-left:1.5ex;
+	padding-right:1.5ex;
+}
+
+.subHeader a:hover {
+	color: white;
+	background-color: #666699;
+}
+
+

@@ -1,28 +1,21 @@
 development:
-  # Sqlite3 Settings
-  adapter: sqlite3
-  database: db/development.sqlite3
-  timeout: 5000
-  
-  # Mysql Settings
-  # adapter: mysql
-  # encoding: utf8
-  # database: test_development
-  # username: root
-  # password:
+  adapter: mysql
+  encoding: utf8
+  database: bort_development
+  username: ruby
+  password: ruby
+  socket: /var/run/mysqld/mysqld.sock
 
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
+# Do not set this db to the same as development or production.
 test:
-  # Sqlite3 Settings
-  adapter: sqlite3
-  database: db/test.sqlite3
-  timeout: 5000
-  
-  # Mysql Settings
-  # adapter: mysql
-  # encoding: utf8
-  # database: test_development
-  # username: root
-  # password:
+  adapter: mysql
+  encoding: utf8
+  database: bort_test
+  username: ruby
+  password: ruby
+  socket: /var/run/mysqld/mysqld.sock
 
 staging:
   # Sqlite3 Settings    
@@ -37,14 +30,10 @@ staging:
   # password:  
 
 production:
-  # Sqlite3 Settings
-  adapter: sqlite3
-  database: db/production.sqlite3
-  timeout: 5000
-  
-  # Mysql Settings
-  # adapter: mysql
-  # encoding: utf8
-  # database: test_development
-  # username: root
-  # password:
+  adapter: mysql
+  encoding: utf8
+  database: bort_production
+  username: ruby
+  password: ruby
+  socket: /var/run/mysqld/mysqld.sock
+

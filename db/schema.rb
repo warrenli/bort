@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080929171348) do
+ActiveRecord::Schema.define(:version => 20081018073210) do
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
   end
 
   create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",  :null => false
+    t.integer "timestamp",                  :null => false
     t.string  "server_url"
-    t.string  "salt",       :null => false
+    t.string  "salt",       :default => "", :null => false
   end
 
   create_table "passwords", :force => true do |t|
@@ -38,20 +38,22 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
     t.string "name"
   end
 
+  add_index "roles", ["name"], :name => "index_roles_on_name", :unique => true
+
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -71,5 +73,7 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["identity_url"], :name => "index_users_on_identity_url", :unique => true
 
 end
