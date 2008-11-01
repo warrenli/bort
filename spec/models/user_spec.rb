@@ -281,6 +281,21 @@ describe User do
     end
   end
 
+  describe "has named_scope " do
+    it "should find users using with_state" do
+      User.with_state("active").should be_all { |u| u.state == 'active' }
+    end
+    it "should find users using email_like" do
+      User.email_like("example").should be_all { |u| u.email =~ /example/ }
+    end
+    it "should find users using login_like" do
+      User.login_like("aaron").should be_all { |u| u.email =~ /aaron/ }
+    end
+    it "should find users using name_like" do
+      User.name_like("aaron").should be_all { |u| u.email =~ /aaron/ }
+    end
+  end
+
 protected
   def create_user(options = {})
     record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))

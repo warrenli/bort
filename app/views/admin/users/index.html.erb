@@ -1,0 +1,77 @@
+<h1><%= @page_title %></h1>
+<fieldset>
+  <legend>Search</legend>
+  <h3>Search By Login Alphanumeric Index</h3>
+  <% @letters.each do |letter| %>
+    <% letter_class = (letter == @initial) ? "letter_current" : "letter" %>
+    <%= link_to letter, { :action => "index", :char => letter },
+                :class => letter_class %>
+  <% end %>&nbsp;
+  <br clear="all" /><br />
+  <h3>Search For</h3>
+  <% form_tag({ :action => "index" }, :method => "get") do %>
+    <div class="form_row">
+      User's
+      <select name="field">
+        <option value="name"   <%= ( params[:field] == 'name')   ? "selected = \"selected\"" : nil %> >name &nbsp;</option>
+        <option value="email"  <%= ( params[:field] == 'email')  ? "selected = \"selected\"" : nil %> >email &nbsp;</option>
+        <option value="login"  <%= ( params[:field] == 'login')  ? "selected = \"selected\"" : nil %> >login &nbsp;</option>
+      </select>
+      begins with <%= text_field_tag "name", params[:name], :size => 10 %>
+      and the user is 
+      <select name="state">
+        <option value="active"    <%= ( params[:state] == 'active')       ? "selected = \"selected\"" : nil %> >active</option>
+        <option value="passive"   <%= ( params[:state] == 'passive')      ? "selected = \"selected\"" : nil %> >passive</option>
+        <option value="pending"   <%= ( params[:state] == 'pending')      ? "selected = \"selected\"" : nil %> >pending</option>
+        <option value="suspended" <%= ( params[:state] == 'suspended')    ? "selected = \"selected\"" : nil %> >suspended</option>
+        <option value="deleted"   <%= ( params[:state] == 'deleted')      ? "selected = \"selected\"" : nil %> >deleted</option>
+        <option value=""          <%= ( params[:state] && params[:state].strip.length == 0) ? "selected = \"selected\"" : nil %> >Any state</option>
+      </select>
+      <%= submit_tag "Search" %>
+    </div>
+    <div class="form_row">
+    <pre>
+    (e.g. Type "App" for "Apple", "Appollo",
+          Type "%pp" for "Apple", "apple", "coppy")
+    </pre>
+    </div>
+    <div class="form_row">
+    </div>
+  <% end %>
+</fieldset>
+<% if @users %>
+  <center>Found <%= pluralize(@users.total_entries, "user") %> </center>
+<% end %>
+<br />
+<span style="float: right"><%= button_to "Create new users", new_admin_user_url,:method => :get %></span>
+<% if @users and not @users.empty? %>
+  <table class="grid">
+  <tr>
+    <th>Login</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Open ID</th>
+    <th>State</th>
+    <th>Actions</th>
+  </tr>
+
+  <% for user in @users %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%=h user.login %></td>
+    <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.identity_url %></td>
+    <td><%=h user.state %></td>
+    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class='pagination'>
+  <div class="page_info">
+    <%= page_entries_info @users %>
+  </div>
+  <%= will_paginate @users   %>
+</div>
+<% end %>
+

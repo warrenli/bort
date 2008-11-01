@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
   # For changing password
   attr_accessor :current_password
 
+  named_scope :with_state, lambda { |arg|  {:conditions => ["state = ?", "#{arg}"],     :order => "login" } }
+  named_scope :email_like, lambda { |arg|  {:conditions => ["email like ?", "#{arg}%"], :order => "login" } }
+  named_scope :name_like,  lambda { |arg|  {:conditions => ["name like ?", "#{arg}%"],  :order => "login" } }
+  named_scope :login_like, lambda { |arg|  {:conditions => ["login like ? or login like ?", "#{arg}%", "#{arg}%".downcase], :order => "login" } } 
+
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

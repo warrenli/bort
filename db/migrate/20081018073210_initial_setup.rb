@@ -33,7 +33,7 @@ class InitialSetup < ActiveRecord::Migration
       t.string :salt, :limit => 40
       t.string :remember_token, :limit => 40
       t.string :activation_code, :limit => 40
-      t.string :state, :null => :no, :default => 'passive'
+      t.string :state, :null => false, :default => 'passive'
       t.datetime :remember_token_expires_at
       t.datetime :activated_at
       t.datetime :deleted_at
@@ -42,6 +42,7 @@ class InitialSetup < ActiveRecord::Migration
 
     add_index :users, :login, :unique => true
     add_index :users, :email, :unique => true
+    add_index :users, :name, :unique => false
     add_index :users, :identity_url, :unique => true
 
     # Create Passwords Table

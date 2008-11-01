@@ -15,6 +15,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :passwords
   map.resource :session
   
+  map.namespace(:admin) do |admin|
+    admin.resources :users, :member => { :register  => :put,
+                                         :activate  => :put,
+                                         :suspend   => :put,
+                                         :unsuspend => :put,
+                                         :purge     => :delete }
+  end
+
   # Home Page
   map.root :controller => 'home', :action => 'index'
 

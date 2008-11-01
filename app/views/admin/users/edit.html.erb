@@ -1,0 +1,72 @@
+<h1><%= @page_title %></h1>
+
+<% form_for([:admin, @user]) do |f| %>
+<%= f.error_messages %>
+<fieldset>
+<legend>Basic Information</legend>
+  <div class="form_row"><label for="login">Login:</label>
+    <%= f.text_field :login %> state is (<%= @user.state %>)
+  </div>
+  <div class="form_row"><label for="email">Email:</label>
+    <%= f.text_field :email %>
+  </div>
+  <div class="form_row"><label for="first_name">Name:</label>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form_row"><label>Activation Code:</label>
+    <%= @user.activation_code || "nil" %>
+  </div>
+  <% if @roles and not @roles.empty? %>
+  <div class="form_row"><label for="login">Has Roles:</label>
+    <div style="margin-left: 150px">
+      <table>
+      <% @roles.in_groups_of(3, false) do |role_row| -%>
+      <tr>
+        <% for oRole in role_row do -%>
+        <td>
+        <%= check_box_tag "user[role_ids][]", oRole.id, @user.roles.include?(oRole) -%>
+        </td>
+        <td>
+        <%= oRole.name -%>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <% end -%>
+      </tr>
+      <% end -%>
+      </table>
+    </div>
+  </div>
+  <% end %>
+  <div class="form_row">
+    <%= submit_tag "Update", :class => "submit", :name => 'basic' %>
+  </div>
+</fieldset>
+<% end %>
+
+<fieldset>
+  <legend>Change State - From (<span style="color:red;"><%= @user.state %></span>)</legend>
+  <br />
+  <table>
+  <tr>
+    <td width="120" align="center">
+      <%= button_to "Register", register_admin_user_path(@user), :confirm => "Are you sure?", :method => :put %>
+    </td>
+    <td width="120" align="center">
+      <%= button_to "Activate", activate_admin_user_path(@user), :confirm => "Are you sure?", :method => :put %>
+    </td>
+    <td width="120" align="center">
+      <%= button_to "Suspend", suspend_admin_user_path(@user), :confirm => "Are you sure?", :method => :put %>
+    </td>
+    <td width="120" align="center">
+      <%= button_to "Unsuspend", unsuspend_admin_user_path(@user), :confirm => "Are you sure?", :method => :put %>
+    </td>
+    <td width="120" align="center">
+      <%= button_to "Mark Deleted", admin_user_path(@user), :confirm => "Are you sure?", :method => :delete %>
+    </td>
+    <td width="120" align="center">
+      <%= button_to "Purge", purge_admin_user_path(@user), :confirm => "Are you sure?", :method => :delete %>
+    </td>
+  </tr>
+  </table>
+</fieldset>
+<%= link_to 'Back', admin_users_path %>
