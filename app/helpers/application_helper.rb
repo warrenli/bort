@@ -16,5 +16,13 @@ module ApplicationHelper
     end
     messages
   end
-  
+
+  def protect_link(rolename, text, controller, action="index")
+    if current_user.has_role?(rolename)
+      link_to_unless_current( text, :id => nil,
+                                     :controller => controller,
+                                     :action => action)
+    end
+  end
+
 end

@@ -33,6 +33,7 @@
         <span style="float: right">
         <% if logged_in? %>
             Hello <%= current_user.login %> &nbsp;
+            <%= protect_link "admin", "Manage Users", "admin/users" %>
             <%= link_to_unless_current 'My Account', edit_user_path(current_user) %>
             <%= link_to 'Logout', logout_path %>
         <% else %>
