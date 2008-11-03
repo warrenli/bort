@@ -162,7 +162,7 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_url
   rescue  Exception => e
     flash[:error] = e.message
-    redirect_to edit_admin_users_url
+    redirect_to edit_admin_user_url(@user)
   end
 
   protected
