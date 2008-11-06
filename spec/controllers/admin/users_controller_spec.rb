@@ -32,63 +32,56 @@ describe Admin::UsersController do
       get :index
       response.should be_success
       response.should render_template('index')
-      assigns[:users].should be_nil
-    end
-
-    it "should expose some users when searching login index by Q" do
-      do_login_as_admin
-      get :index, :char => 'Q'
-      response.should be_success
-      response.should render_template('index')
       assigns[:users].should_not be_nil
+      assigns[:users].length.should == 1
       assigns[:users][0].login.should == "quentin"
     end
 
-    it "should return error when searching without keyword" do
+    it "should expose some users when searching with criteria :login_contains => 'quentin' " do
       do_login_as_admin
-      get :index, { :field => 'login', :name => '', :state =>'active' }
-      response.flash[:error].should =~ /Missing keyword/
+      get :index, :search => { :conditions => { :login_contains => "quentin" } }
+
       response.should be_success
       response.should render_template('index')
-      assigns[:users].should be_nil
+      assigns[:users].should_not be_nil
+      assigns[:users].should be_all { |u| u.login =~ /quentin/}
     end
 
-    it "should expose some users when searching by login" do
+    it "should expose some users when searching with criteria :name_contains => 'quentin' " do
       do_login_as_admin
-      get :index, { :field => 'login', :name => 'quentin', :state =>'active' }
-      response.should be_success
-      response.should render_template('index')
-      assigns[:users].should be_all { |u| u.login == "quentin"}
-      get :index, { :field => 'login', :name => 'quentin', :state =>'' }
-      response.should be_success
-      response.should render_template('index')
-      assigns[:users].should be_all { |u| u.login == "quentin"}
+      get :index, :search => { :conditions => { :name_contains => "quentin" } }
 
+      response.should be_success
+      response.should render_template('index')
+      assigns[:users].should_not be_nil
+      assigns[:users].should be_all { |u| u.name =~ /quentin/}
     end
 
-    it "should expose some users when searching by name" do
+    it "should expose some users when searching with criteria :email_ends_with => 'quentin' " do
       do_login_as_admin
-      get :index, { :field => 'name', :name => 'quentin', :state =>'active' }
+      get :index, :search => { :conditions => { :email_ends_with => "example.com" } }
+
       response.should be_success
       response.should render_template('index')
-      assigns[:users].should be_all { |u| u.name == "quentin"}
-      get :index, { :field => 'name', :name => 'quentin', :state =>'' }
-      response.should be_success
-      response.should render_template('index')
-      assigns[:users].should be_all { |u| u.name == "quentin"}
+      assigns[:users].should_not be_nil
+      assigns[:users].should be_all { |u| u.email =~ /example.com$/}
     end
 
-    it "should expose some users when searching by email" do
+    it "should expose one user when searching with criteria being :quentin " do
       do_login_as_admin
-      get :index, { :field => 'email', :name => 'example', :state =>'active' }
+      get :index, :search => { :conditions => { :login_contains => "quentin",
+                                                :name_contains => "quentin",
+                                                :email_ends_with => "quentin@example.com" } }
+
       response.should be_success
       response.should render_template('index')
-      assigns[:users].should be_all { |u| u.email == "example"}
-      get :index, { :field => 'email', :name => 'example', :state =>'' }
-      response.should be_success
-      response.should render_template('index')
-      assigns[:users].should be_all { |u| u.email == "example"}
+      assigns[:users].should_not be_nil
+      assigns[:users].length.should == 1
+      assigns[:users].should be_all { |u| u.login =~ /quentin/}
+      assigns[:users].should be_all { |u| u.name =~ /quentin/}
+      assigns[:users].should be_all { |u| u.email =~ /quentin@example.com$/}
     end
+    
   end
 
 

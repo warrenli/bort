@@ -1,0 +1,45 @@
+<% if @users_count > 0 %>
+  Found <%= pluralize(@users_count, "user") %>
+  <br />
+  <br />
+  <% if @users_count > 10 %>
+  <%= remote_per_page_select %>&nbsp;&nbsp;
+  <% end %>
+  <% if @search.page_count > 1 %>
+  <span class="pages">
+    <%= remote_page_links %>
+  </span>
+  <br />
+  <br />
+  <% end %>
+  <table class="grid">
+  <tr>
+    <th><%= remote_order_by_link :login %></th>
+    <th><%= remote_order_by_link :name %></th>
+    <th><%= remote_order_by_link :email %></th>
+    <th><%= remote_order_by_link :identity_url, :text => 'Open ID' %></th>
+    <th>State</th>
+    <th>Actions</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%=h user.login %></td>
+    <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.identity_url %></td>
+    <td><%=h user.state %></td>
+    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+  </tr>
+  <% end %>
+  </table>
+  <br />
+  <br />
+  <% if @users_count > 10 %>
+  <%= remote_per_page_select %>&nbsp;&nbsp;
+  <span class="pages">
+    <%= remote_page_links %>
+  </span>
+  <% end %>
+<% else %>
+  No record found
+<% end %>

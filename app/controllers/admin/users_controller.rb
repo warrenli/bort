@@ -6,48 +6,10 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.xml
   def index
-    @page_title = "Listing Users"
-    @letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("")
-    @users = nil
-    page_size = params[:page_size].to_i > 0 ? params[:page_size].to_i : 10
-    if params[:char]
-          keyword = params[:char]
-          @users = User.login_like(keyword)
-          flash.now[:notice] = "No record found for login begin with " + params[:char]  if @users.length == 0
-    end
-    if params[:name]
-      if params[:name].strip.length == 0
-        flash.now[:error] = "Missing keyword"
-      else
-        keyword = params[:name]
-        state = params[:state] if params[:state].strip.length > 0
-        if state
-          case params[:field]
-          when 'email'
-            @users = User.email_like(keyword).with_state(state)
-          when 'login'
-            @users = User.login_like(keyword).with_state(state)
-          when 'name'
-            @users = User.name_like(keyword).with_state(state)
-          end
-        else
-          case params[:field]
-          when 'email'
-            @users = User.email_like(keyword)
-          when 'login'
-            @users = User.login_like(keyword)
-          when 'name'
-            @users = User.name_like(keyword)
-          end
-        end
-      end
-    end
-    @users = @users.paginate  :page => params[:page], :per_page => page_size if @users
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
+    @page_title = "Users"
+    criteria = params[:search] ||  { :conditions => { :login => "#{current_user.login}" } }
+    @search = User.new_search(criteria)
+    @users, @users_count = @search.all, @search.count
   end
 
   # GET /admin/users/1

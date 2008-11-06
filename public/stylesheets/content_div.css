@@ -26,12 +26,13 @@
     font-weight: bold;
     font-style: italic;
 }
+/*
 #content_inner a {
     color: #666699;
     background-color: transparent;
     text-decoration: underline;
 }
-
+*/
 #content_inner a:hover {
     text-decoration: blink;
 }
