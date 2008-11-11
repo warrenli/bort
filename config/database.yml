@@ -18,17 +18,20 @@ test:
   socket: /var/run/mysqld/mysqld.sock
 
 staging:
-  # Sqlite3 Settings    
+  # Sqlite Settings
   adapter: sqlite3
   database: db/staging.sqlite3
+  pool: 5
   timeout: 5000
+
   # Mysql Settings
   # adapter: mysql
   # encoding: utf8
-  # database: test_development
+  # database: bort_staging
   # username: root
-  # password:  
-
+  # password:
+  # pool: 5
+  
 production:
   adapter: mysql
   encoding: utf8
@@ -36,4 +39,5 @@ production:
   username: ruby
   password: ruby
   socket: /var/run/mysqld/mysqld.sock
+
 
