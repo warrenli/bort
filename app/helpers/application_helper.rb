@@ -25,4 +25,15 @@ module ApplicationHelper
     end
   end
 
+  def locale_link(locale, locale_desc)
+     locale_text = "#{locale_desc} (#{locale})"
+     options =  { :locale => "#{locale}" }
+     if I18n.locale == locale
+       "#{locale_desc} (#{locale})"
+     else
+       link_to locale_text,
+       url_for( {:controller => self.controller_name, :action => self.action_name}.merge(options) )
+     end
+  end
+
 end

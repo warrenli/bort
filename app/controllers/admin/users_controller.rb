@@ -6,7 +6,6 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.xml
   def index
-    @page_title = "Users"
     criteria = params[:search] ||  { :conditions => { :login => "#{current_user.login}" } }
     @search = User.new_search(criteria)
     @users, @users_count = @search.all, @search.count
@@ -31,7 +30,6 @@ class Admin::UsersController < ApplicationController
 
   # GET /admin/users/1/edit
   def edit
-    @page_title = "User Management - Edit user"
     @roles = Role.find(:all, :order => :name)
   end
 
@@ -42,7 +40,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:notice] = 'User was successfully created.'
+        flash[:notice] = t("admin.users.create.success_msg")
         format.html { redirect_to edit_admin_user_path(@user) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -55,7 +53,6 @@ class Admin::UsersController < ApplicationController
   # PUT /admin/users/1
   # PUT /admin/users/1.xml
   def update
-    @page_title = "User Management - Edit user"
     @roles = Role.find(:all, :order => :name)
 
     respond_to do |format|
@@ -63,7 +60,7 @@ class Admin::UsersController < ApplicationController
         @user.role_ids = params[:user][:role_ids]
         @user.save!
 
-        flash[:notice] = 'User was successfully updated.'
+        flash[:notice] = t("admin.users.update.success_msg")
         format.html { redirect_to edit_admin_user_path(@user) }
         format.xml  { head :ok }
       else

@@ -1,0 +1,98 @@
+zh-HK:
+  app:
+    site_title: "網站標題"
+    site_subtitle: "網站小標題"
+    hello: "歡迎您"
+    menu:
+      login: "登入"
+      signup: "登記"
+      logout: "登出"
+      my_account: "我的帳戶"
+      manage_users: "管理帳戶"
+  sessions:
+    new:
+      page_title: "登入"
+      login_legend: "登入帳戶"
+      username: "帳戶名稱"
+      password: "帳戶密碼"
+      remember_me: "記錄帳戶"
+      openid_legend: "使用 OpenID"
+      login_button: "登入"
+      forget_password_link: "忘記密碼"
+      login_success_msg: "成功登入"
+      login_failed_msg: "不能登入為"
+    destroy:
+      logout_success_msg: "閣下成功登出"
+  users:
+    new:
+      page_title: "登記"
+      signup_legend: "帳戶資料"
+      openid_legend: "使用 OpenID"
+      signup_button: "登記"
+    create:
+      failed_default_message: "對不起, 未能建立新帳戶" 
+      success_message: "多謝您登記!"
+      success_no_openid_msg: " 將會以電子郵件通知閣下啟動新帳戶"
+      success_openid_msg: " 閣下可以使用 OpenID 登入"
+    edit:
+      page_title: "我的帳戶"
+      update_button: "更新"
+      basic_legend: "基本資料"
+      change_password_legend: "更改密碼"
+      update_success_msg: "成功更新資料"
+      update_error_msg: "請覆核你的資料"
+      change_passwd_ok_msg: "成功更改密碼"
+      change_passwd_error_msg: "新密碼無效"
+      current_passwd_error_msg: "請輸入目前使用的密碼"
+      invalid_msg: "無效"
+    activate:
+      success_msg: "帳戶已成功啟動，可以登入了"
+      missing_code_msg: "沒有'activation code' 請按電郵指示啟動帳戶"
+      error_msg: "未能啟動帳戶，請覆核你的電郵。或許帳戶已啟動，請登入試試"
+  passwords:
+    new:
+      page_title: "忘記密碼?"
+      email_legend: "請輸入電郵地址"
+      submit_button: "上傳"
+    create:
+      success_msg: "更改密碼的超鏈接經已送到電郵地址 {{your_email}}."
+      failed_msg: "更改密碼的超鏈接經已送出，請查看電子郵件"
+    reset:
+      page_title: "重置密碼"
+      instruction: "請輸入新密碼並且確應"
+      update_password_legend: "設定密碼"
+      submit_button: "上傳"
+      invalid_msg: "重置密碼的 URL 無效"
+    update_after_forgetting:
+      success_msg: "成功設定新密碼"
+      failed_msg: "EPIC FAIL!"
+  admin:
+    go_back: "返回"
+    users:
+      new:
+        page_title: "管理帳戶 - 新帳戶"
+        user_legend: "新帳戶資料"
+        create_button: "建立新帳戶"
+      create:
+        success_msg: "成功建立新帳戶"
+      index:
+        page_title: "管理帳戶"
+        search_legend: "搜尋帳戶"
+        match: "配合"
+        match_criteria: "以下準則"
+        login_contains: "帳戶名稱包含"
+        name_contains: "別名包含"
+        email_ends_with: "電郵末尾包含"
+        search_button: "搜尋"
+        new_user_button: "建立新帳戶"
+        found: "尋得"
+        actions_header: "功能"
+        action_edit: "修改"
+      edit:
+        page_title: "管理帳戶 - 修改帳戶資料"
+        basic_legend: "基本資料"
+        update_button: "修改"
+        change_state_legend: "修改 狀態 由 - "
+      update:
+        success_msg: "成功修改帳戶資料"
+

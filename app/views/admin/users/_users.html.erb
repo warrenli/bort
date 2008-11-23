@@ -1,5 +1,6 @@
 <% if @users_count > 0 %>
-  Found <%= pluralize(@users_count, "user") %>
+  <%= t("admin.users.index.found") + " " + @users_count.to_s %>
+  <%= t("activerecord.models.user", :count => @users_count) %>
   <br />
   <br />
   <% if @users_count > 10 %>
@@ -14,12 +15,12 @@
   <% end %>
   <table class="grid">
   <tr>
-    <th><%= remote_order_by_link :login %></th>
-    <th><%= remote_order_by_link :name %></th>
-    <th><%= remote_order_by_link :email %></th>
-    <th><%= remote_order_by_link :identity_url, :text => 'Open ID' %></th>
-    <th>State</th>
-    <th>Actions</th>
+    <th><%= remote_order_by_link :login, :text => User.human_attribute_name('login') %></th>
+    <th><%= remote_order_by_link :name, :text => User.human_attribute_name('name') %></th>
+    <th><%= remote_order_by_link :email, :text => User.human_attribute_name('email') %></th>
+    <th><%= remote_order_by_link :identity_url, :text => User.human_attribute_name('identity_url') %></th>
+    <th><%= User.human_attribute_name('state') %></th>
+    <th><%= t("admin.users.index.actions_header") %></th>
   </tr>
   <% @users.each do |user| %>
   <tr class="<%= cycle('odd', 'even') %>">
@@ -28,7 +29,7 @@
     <td><%=h user.email %></td>
     <td><%=h user.identity_url %></td>
     <td><%=h user.state %></td>
-    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+    <td><%= link_to t("admin.users.index.action_edit"), edit_admin_user_path(user) %></td>
   </tr>
   <% end %>
   </table>

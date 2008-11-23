@@ -30,30 +30,31 @@ span.current_page {
 }
 </style>
 <% end %>
-<h1><%= @page_title %></h1>
+<%= title t("admin.users.index.page_title"), :h1 %>
 <fieldset>
-  <legend>Search users</legend>
+  <legend><%= t("admin.users.index.search_legend") %></legend>
   <% form_for @search, :url=>admin_users_path do |f| -%>
     <% f.fields_for @search.conditions do |users| %>
-      <div class="form_row"><label for="any">Match:</label>
-      <%= users.select :any, [ ["All", false], ["Any", true] ] %> of the following conditions
+      <div class="form_row"><label><%= t("admin.users.index.match") %></label>
+      <%= users.select :any, [ ["All", false], ["Any", true] ] %>
+      <%= t("admin.users.index.match_criteria") %>
       </div>
-      <div class="form_row"><label for="login">Login contains:</label>
+      <div class="form_row"><label><%= t("admin.users.index.login_contains") %></label>
       <%= users.text_field :login_contains %>
       </div>
-      <div class="form_row"><label for="name">Name contains:</label>
+      <div class="form_row"><label><%= t("admin.users.index.name_contains") %></label>
       <%= users.text_field :name_contains %>
       </div>
-      <div class="form_row"><label for="email">Email ends with:</label>
+      <div class="form_row"><label><%= t("admin.users.index.email_ends_with") %></label>
       <%= users.text_field :email_ends_with %>
       </div>
     <% end %>
     <div class="form_row">
-      <%= submit_tag "Search", :class=>"submit" %>
+      <%= submit_tag t("admin.users.index.search_button"), :class=>"submit" %>
     </div>
   <% end %>
 </fieldset>
-<span style="float: right"><%= button_to "Create new users", new_admin_user_url,:method => :get %></span>
+<span style="float: right"><%= button_to t("admin.users.index.new_user_button"), new_admin_user_url,:method => :get %></span>
 <div id="users">
   <%= render :partial => "users" %>
 </div>

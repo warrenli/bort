@@ -9,10 +9,10 @@ class PasswordsController < ApplicationController
     
     if @password.save
       PasswordMailer.deliver_forgot_password(@password)
-      flash[:notice] = "A link to change your password has been sent to #{@password.email}."
+      flash[:notice] = t("passwords.create.success_msg", :your_email => "#{@password.email}")
       redirect_to :action => :new
     else
-      flash[:error] = "A link to change your password has been sent to your email address."
+      flash[:error] = t("passwords.create.failed_msg")
       redirect_to :action => :new
       # render :action => :new
     end
@@ -22,7 +22,7 @@ class PasswordsController < ApplicationController
     begin
       @user = Password.find(:first, :conditions => ['reset_code = ? and expiration_date > ?', params[:reset_code], Time.now]).user
     rescue
-      flash[:notice] = 'The change password URL you visited is either invalid or expired.'
+      flash[:notice] = t("passwords.reset.invalid_msg")
       redirect_to new_password_path
     end    
   end
@@ -31,10 +31,10 @@ class PasswordsController < ApplicationController
     @user = Password.find_by_reset_code(params[:reset_code]).user
     
     if @user.update_attributes(params[:user])
-      flash[:notice] = 'Password was successfully updated.'
+      flash[:notice] = t("passwords.update_after_forgetting.success_msg")
       redirect_to login_path
     else
-      flash[:notice] = 'EPIC FAIL!'
+      flash[:error] = t("passwords.update_after_forgetting.failed_msg")
       redirect_to :action => :reset, :reset_code => params[:reset_code]
     end
   end

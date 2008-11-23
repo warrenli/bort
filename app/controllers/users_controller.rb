@@ -28,13 +28,13 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
-      flash[:notice] = "Signup complete! Please sign in to continue."
+      flash[:notice] = t("users.activate.success_msg")
       redirect_to login_path
     when params[:activation_code].blank?
-      flash[:error] = "The activation code was missing.  Please follow the URL from your email."
+      flash[:error] = t("users.activate.missing_code_msg")
       redirect_back_or_default(root_path)
     else 
-      flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
+      flash[:error]  = t("users.activate.error_msg")
       redirect_back_or_default(root_path)
     end
   end
@@ -60,21 +60,21 @@ class UsersController < ApplicationController
     case attribute
       when "basic"
         if @user.update_attributes(params[:user])
-          flash.now[:notice] = 'Basic Information was successfully updated.'
+          flash.now[:notice] = t("users.edit.update_success_msg")
         else
-          flash.now[:error]  = 'Please check your input.'
+          flash.now[:error]  = t("users.edit.update_error_msg")
         end
       when "password"
         if User.authenticate(@user.login, params[:user][:current_password])
           if @user.update_attributes(params[:user])
-            flash.now[:notice] = 'Password was successfully updated.'
+            flash.now[:notice] = t("users.edit.change_passwd_ok_msg")
           else
-            flash.now[:error] = 'Invalid! Password not changed.'
+            flash.now[:error] = t("users.edit.change_passwd_error_msg")
             # @user.errors.add_to_base("New password not valid")
           end
         else
-          flash.now[:error] = 'Please enter your current password.'
-          @user.errors.add(:current_password, "not valid")
+          flash.now[:error] = t("users.edit.current_passwd_error_msg")
+          @user.errors.add(:current_password, t("users.edit.invalid_msg"))
         end
     end
     respond_to do |format|
@@ -105,12 +105,12 @@ class UsersController < ApplicationController
   
   def successful_creation(user)
     redirect_back_or_default(root_path)
-    flash[:notice] = "Thanks for signing up!"
-    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
-    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
+    flash[:notice] = t("users.create.success_message")
+    flash[:notice] << t("users.create.success_no_openid_msg") if @user.not_using_openid?
+    flash[:notice] << t("users.create.success_openid_msg") unless @user.not_using_openid?
   end
   
-  def failed_creation(message = 'Sorry, there was an error creating your account')
+  def failed_creation(message = t("users.create.failed_default_message"))
     flash[:error] = message
     render :action => :new
   end

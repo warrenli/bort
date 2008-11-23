@@ -20,24 +20,25 @@
   <div id="header">
     <div id="header_inner">
       <div class="superHeader">
-      Super Header
+      <%= locale_link("en-US", "English") %>
+      <%= locale_link("zh-HK", "中文") %>
       </div>
       <div class="midHeader">
-        <h1 class="headerTitle" lang="la">Site Title</h1>
+        <h1 class="headerTitle" lang="la"><%= t 'app.site_title' %></h1>
         <div class="headerSubTitle">
-        Site Subtitle
+        <%= t 'app.site_subtitle' %>
         </div>
       </div>
       <div class="subHeader">
         <span style="float: right">
         <% if logged_in? %>
-            Hello <%= current_user.login %> &nbsp;
-            <%= protect_link "admin", "Manage Users", admin_users_path %>
-            <%= link_to_unless_current 'My Account', edit_user_path(current_user) %>
-            <%= link_to 'Logout', logout_path %>
+            <%= I18n.t 'app.hello' %> <%= current_user.login %> &nbsp;
+            <%= protect_link "admin", t('app.menu.manage_users'), admin_users_path %>
+            <%= link_to_unless_current t('app.menu.my_account'), edit_user_path(current_user) %>
+            <%= link_to t('app.menu.logout'), logout_path %>
         <% else %>
-            <%= link_to_unless_current 'Login', login_path %>
-            <%= link_to_unless_current 'Signup', signup_path %>
+            <%= link_to_unless_current t('app.menu.login'), login_path %>
+            <%= link_to_unless_current t('app.menu.signup'), signup_path %>
         <% end %>
         </span>
         &nbsp;

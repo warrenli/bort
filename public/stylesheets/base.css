@@ -77,13 +77,27 @@ div#header {
 #header_inner {  }
 
 .superHeader {
-    color: #82809A;
+    color: #CCFF00;
     background-color: maroon;
     text-align: right;
     margin: 0;
     padding: 5px 6px;
 }
 
+.superHeader a {
+    color: #CCFF00;
+    font-weight: bold;
+	margin: 0;
+    padding-bottom:1ex;
+    padding-top:2ex;
+	padding-left:0.5ex;
+	padding-right:0.5ex;
+}
+
+.superHeader a:hover {
+    color: white;
+    background-color: #CC3333;
+}
 
 .midHeader {
     color: #FFFF66;
@@ -145,7 +159,8 @@ div#header {
 /*
  * content_div
  */
-.float_left {float:left; margin: 0 .3em .3em 0;}      /* apply this class to any image or element with width - text will wrap it to the right */.float_right {float:right;  margin: 0 0 .3em .3em;} /* apply this class to any image or element with width  - text will wrap it to the left */
+.float_left {float:left; margin: 0 .3em .3em 0;}      /* apply this class to any image or element with width - text will wrap it to the right */
+.float_right {float:right;  margin: 0 0 .3em .3em;} /* apply this class to any image or element with width  - text will wrap it to the left */
 
 #content_inner {
     color: black;

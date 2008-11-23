@@ -1,24 +1,24 @@
-<%= title "Login", :h2 %>
+<%= title t("sessions.new.page_title"), :h2 %>
 <% form_tag session_path do %>
 	<fieldset>
-		<legend>Your Details</legend>
+		<legend><%= t("sessions.new.login_legend") %></legend>
 		<ol>
 			<li>
-				<%= label_tag 'login', 'Username' %>
+				<%= label_tag 'login', t("sessions.new.username") %>
 				<%= text_field_tag 'login', @login %>
 			</li>
 			<li>
-				<%= label_tag 'password' %>
+				<%= label_tag t("sessions.new.password") %>
 				<%= password_field_tag 'password', nil %>
 			</li>
 			<li>
-				<%= label_tag 'remember_me', 'Remember me' %>
+				<%= label_tag 'remember_me', t("sessions.new.remember_me") %>
 				<%= check_box_tag 'remember_me', '1', @remember_me %>
 			</li>
 		</ol>
 	</fieldset>
 	<fieldset>
-		<legend>Login with OpenID</legend>
+		<legend><%= t("sessions.new.openid_legend") %></legend>
 		<ol>
 			<li>
 				<%= label_tag 'openid_url', 'OpenID URL' %>
@@ -27,7 +27,7 @@
 		</ol>
 	</fieldset>
 	<div class="buttons">
-		<%= submit_tag 'Login' %>
-		<%= link_to 'Forgotten Password', forgot_password_path %>
+		<%= submit_tag t("sessions.new.login_button") %>
+		<%= link_to t("sessions.new.forget_password_link"), forgot_password_path %>
 	</div>
 <% end -%>

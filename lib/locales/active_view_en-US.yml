@@ -1,0 +1,98 @@
+en-US:
+  app:
+    site_title: "Site Title"
+    site_subtitle: "Site Subtitle"
+    hello: "Hello"
+    menu:
+      login: "Login"
+      signup: "Signup"
+      logout: "Logout"
+      my_account: "My Account"
+      manage_users: "Manage Users"
+  sessions:
+    new:
+      page_title: "Login"
+      login_legend: "Login Detail"
+      username: "Username"
+      password: "Password"
+      remember_me: "Remember Me"
+      openid_legend: "Login with OpenID"
+      login_button: "Login"
+      forget_password_link: "Forgotten Password"
+      login_success_msg: "Logged in successfully"
+      login_failed_msg: "Couldn't log you in as"
+    destroy:
+      logout_success_msg: "You have been logged out."
+  users:
+    new:
+      page_title: "Sign Up"
+      signup_legend: "Login Detail"
+      openid_legend: "Signup with OpenID"
+      signup_button: "Sign Up"
+    create:
+      failed_default_message: "Sorry, there was an error creating your account" 
+      success_message: "Thanks for signing up!"
+      success_no_openid_msg: " We're sending you an email with your activation code."
+      success_openid_msg: " You can now login with your OpenID."
+    edit:
+      page_title: "My Account"
+      update_button: "Update"
+      basic_legend: "Basic Information"
+      change_password_legend: "Change Password"
+      update_success_msg: "Basic Information was successfully updated."
+      update_error_msg: "Please check your input."
+      change_passwd_ok_msg: "Password was successfully updated."
+      change_passwd_error_msg: "Invalid! Password not changed."
+      current_passwd_error_msg: "Please enter your current password."
+      invalid_msg: "not valid"
+    activate:
+      success_msg: "Signup complete! Please sign in to continue."
+      missing_code_msg: "The activation code was missing.  Please follow the URL from your email."
+      error_msg: "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
+  passwords:
+    new:
+      page_title: "Forgot Your Password?"
+      email_legend: "Enter Your Email Address"
+      submit_button: "Submit"
+    create:
+      success_msg: "A link to change your password has been sent to {{your_email}}."
+      failed_msg: "A link to change your password has been sent to your email address."
+    reset:
+      page_title: "Reset Your Password"
+      instruction: "Please enter a new password and confirm it."
+      update_password_legend: "Update Password"
+      submit_button: "Submit"
+      invalid_msg: "The change password URL you visited is either invalid or expired."
+    update_after_forgetting:
+      success_msg: "Password was successfully updated."
+      failed_msg: "EPIC FAIL!"
+  admin:
+    go_back: "Back"
+    users:
+      new:
+        page_title: "User Management - Create User"
+        user_legend: "New User"
+        create_button: "Create"
+      create:
+        success_msg: "User was successfully created."
+      index:
+        page_title: "User Management"
+        search_legend: "Search Users"
+        match: "Match"
+        match_criteria: "of the following conditions"
+        login_contains: "Login contains"
+        name_contains: "Name contains"
+        email_ends_with: "Email ends with"
+        search_button: "Search"
+        new_user_button: "Create new user"
+        found: "Found"
+        actions_header: "Actions"
+        action_edit: "Edit"
+      edit:
+        page_title: "User Management - Edit User"
+        basic_legend: "Basic Information"
+        update_button: "Update"
+        change_state_legend: "Change State From - "
+      update:
+        success_msg: "User was successfully updated."
+

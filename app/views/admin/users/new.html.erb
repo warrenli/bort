@@ -1,33 +1,36 @@
-<h1>New user</h1>
-
+<% @user.password = @user.password_confirmation = @user.current_password = nil %>
+<%= title t("admin.users.new.page_title"), :h1 %>
 <% form_for :user, :url=>admin_users_path do |f| -%>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :login %>
-    <%= f.text_field :login %>
-  </p>
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </p>
+  <fieldset>
+    <legend><%= t("admin.users.new.user_legend") %></legend>
 
-  <p>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation, 'Confirm Password' %>
-    <%= f.password_field :password_confirmation %>
-  </p>
+    <div class="form_row"><%= f.label :login %>
+      <%= f.text_field :login %>
+    </div>
 
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+    <div class="form_row"><%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form_row"><%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="form_row"><%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="form_row"><%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="form_row">
+      <%= submit_tag t("admin.users.new.create_button"), :class => "submit" %>
+    </div>
+
+  </fieldset>
 <% end %>
 
-<%= link_to 'Back', admin_users_path %>
+<%= link_to t("admin.go_back"), admin_users_path %>

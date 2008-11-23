@@ -1,31 +1,31 @@
 <% @user.password = @user.password_confirmation = @user.current_password = nil %>
-<%= title "My Account", :h1 %>
+<%= title t("users.edit.page_title"), :h1 %>
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
   <fieldset>
-    <legend>Basic Information</legend>
+    <legend><%= t("users.edit.basic_legend") %></legend>
 
     <%= hidden_field_tag "attribute", "basic", :id => nil %>
 
-    <div class="form_row"><label for="login">Login:</label>
-      <%= @user.login %>
+    <div class="form_row"><%= f.label :login %>
+      &nbsp;<%= @user.login %>
     </div>
 
-    <div class="form_row"><label for="email">Email:</label>
+    <div class="form_row"><%= f.label :email %>
       <%= f.text_field :email %>
     </div>
 
-    <div class="form_row"><label for="name">Name:</label>
+    <div class="form_row"><%= f.label :name %>
       <%= f.text_field :name %>
     </div>
 
-    <div class="form_row"><label for="identity_url">OpenID URL:</label>
+    <div class="form_row"><%= f.label :identity_url %>
       <%= f.text_field :identity_url %>
     </div>
 
     <div class="form_row">
-      <%= submit_tag "Update", :class => "submit" %>
+      <%= submit_tag t("users.edit.update_button"), :class => "submit" %>
     </div>
 
   </fieldset>
@@ -33,24 +33,24 @@
 
 <% form_for @user do |f| %>
   <fieldset>
-    <legend>Change Password</legend>
+    <legend><%= t("users.edit.change_password_legend") %></legend>
 
     <%= hidden_field_tag "attribute", "password", :id => nil %>
 
-    <div class="form_row"><label for="current_password">Current Password:</label>
+    <div class="form_row"><%= f.label :current_password %>
       <%= f.password_field :current_password %>
     </div>
 
-    <div class="form_row"><label for="password">New Password:</label>
+    <div class="form_row"><%= f.label :password %>
       <%= f.password_field :password %>
     </div>
 
-    <div class="form_row"><label for="password_confirmation">Confirm Password:</label>
+    <div class="form_row"><%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </div>
 
     <div class="form_row">
-      <%= submit_tag "Update", :class => "submit" %>
+      <%= submit_tag t("users.edit.update_button"), :class => "submit" %>
     </div>
 </fieldset>
 <% end %>

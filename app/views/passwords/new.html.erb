@@ -1,17 +1,17 @@
-<%= title "Forgot Your Password?", :h2 %>
+<%= title t("passwords.new.page_title"), :h2 %>
 <% form_for @password do |f| %>
   <%= f.error_messages %>
 	<fieldset>
-		<legend>Enter Your Email Address</legend>
+		<legend><%= t("passwords.new.email_legend") %></legend>
 		<ol>
-			<li>			
+			<li>
 		    <%= f.label :email %>
 		    <%= f.text_field :email %>
 			</li>
 		</ol>
 	</fieldset>
 	<div class="buttons">
-  	<%= f.submit "Submit" %>
+	<%= f.submit t("passwords.new.submit_button") %>
 	</div>
 <% end %>
 
