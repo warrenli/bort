@@ -20,7 +20,7 @@ zh-HK:
       login_button: "登入"
       forget_password_link: "忘記密碼"
       login_success_msg: "成功登入"
-      login_failed_msg: "不能登入為"
+      login_failed_msg: "不能登入為 '{{login}}'"
     destroy:
       logout_success_msg: "閣下成功登出"
   users:

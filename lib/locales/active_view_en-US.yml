@@ -20,7 +20,7 @@ en-US:
       login_button: "Login"
       forget_password_link: "Forgotten Password"
       login_success_msg: "Logged in successfully"
-      login_failed_msg: "Couldn't log you in as"
+      login_failed_msg: "Couldn't log you in as '{{login}}'"
     destroy:
       logout_success_msg: "You have been logged out."
   users:

@@ -42,8 +42,7 @@ class SessionsController < ApplicationController
       note_failed_signin
       @login = params[:login]
       @remember_me = params[:remember_me]
-      render :action => :new
-      # redirect_to login_url  I think this is better
+      redirect_to login_url
     end
   end
   
@@ -55,7 +54,7 @@ class SessionsController < ApplicationController
   end
 
   def note_failed_signin
-    flash[:error] = t("sessions.new.login_failed_msg") + " '#{params[:login]}'"
+    flash[:error] = t("sessions.new.login_failed_msg", :login => "#{params[:login]}" )
     logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
   end
 end
